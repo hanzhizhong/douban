@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import App from './App'
+import "./common/reset.css"
+import "./common/iconfont.css"
 
 Vue.config.productionTip = false
 

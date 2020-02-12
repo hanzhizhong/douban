@@ -1,16 +1,76 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path":"pages/search/search",
+			"style":{
+				"navigationStyle":"custom",
+				"navigationBarTextStyle":"white"
+			}
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarBackgroundColor": "#41B955",
+				"navigationBarTitleText": "首页",
+				"navigationBarTextStyle":"white",
+				"navigationStyle":"custom"
 			}
-		}
-	],
+		},
+		
+	    {
+	        "path" : "pages/rank/rank",
+	        "style" : {
+	    		"navigationBarTitleText":"榜单"
+	    	}
+	    },
+        {
+            "path" : "pages/personal/personal",
+            "style" : {
+        		"navigationBarTitleText":"我的"
+        	}
+        }
+        ,{
+            "path" : "components/listPart/listPart",
+            "style" : {}
+        }
+        ,{
+            "path" : "components/rankAd/rankAd",
+            "style" : {}
+        }
+        ,{
+            "path" : "components/recommendList/recommendList",
+            "style" : {}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarTitleText": "豆瓣评分",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#ffffff"
+	},
+	"tabBar": {
+	    "color": "#666666",
+	    "selectedColor": "#41B955",
+	    "borderStyle": "black",
+	    "backgroundColor": "#ffffff",
+		
+	    "list": [
+			{
+				"pagePath":"pages/index/index",
+				"iconPath":"static/image/home_default.png",
+				"selectedIconPath":"static/image/home_selected.png",
+				"text":"首页"
+			}
+		,{
+	        "pagePath": "pages/rank/rank",
+	        "iconPath": "static/image/rank_default.png",
+	        "selectedIconPath": "static/image/rank_selected.png",
+	        "text": "榜单"
+	    }, {
+	        "pagePath": "pages/personal/personal",
+	        "iconPath": "static/image/person_default.png",
+	        "selectedIconPath": "static/image/person_selected.png",
+	        "text": "我的"
+	    }]
 	}
 }
