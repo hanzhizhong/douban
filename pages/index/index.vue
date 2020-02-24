@@ -20,6 +20,7 @@
 	import listPart from "../../components/listPart/listPart.vue"
 	import pic from "../../static/image/ad/default.webp"
 	import navBar from "../../components/navBar/navBar.vue" 
+	
 	export default {
 		data() {
 			return {
@@ -628,10 +629,13 @@
 			navBar
 		},
 		onLoad() {
-
+			this.getInTheaters()
 		},
 		methods: {
-			
+			//获取正在上映的电影数据
+			getInTheaters(){
+				this.$store.dispatch("getInTheatersData")
+			}
 		}
 	}
 </script>

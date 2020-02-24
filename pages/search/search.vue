@@ -7,7 +7,8 @@
 			</view>
 		</nav-bar>
 		<view class="search-input">
-			<input class="uni-input" confirm-type="search" placeholder="键盘右下角按钮显示为搜索" />
+			<text class="iconfont iconsearch"></text>
+			<input class="uni-input" confirm-type="search" placeholder="搜索" />
 		</view>
 	</view>
 </template>
@@ -51,9 +52,17 @@
 	display:flex;
 	justify-content:center;
 	align-items:center;
+	position:relative;
+	text{
+		position:absolute;
+		color:#dedede;
+		left:3%;
+	}
 	input{
 		width:90%;
+		padding-left:40upx;
 		background-color:#fff;
+		border-radius:8upx;
 	}
 }
 </style>
