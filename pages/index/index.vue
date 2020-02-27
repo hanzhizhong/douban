@@ -9,9 +9,10 @@
 			</view>
 		</view>
 		<view class="home-content">
+			{{localCity}}
 			<block v-for="(item,index) in filmsList" :key="index">
 				<list-part :title="item.title" :subjects="item.subjects"></list-part>
-			</block>
+			</block>  
 		</view>
 	</view>
 </template>
@@ -20,7 +21,8 @@
 	import listPart from "../../components/listPart/listPart.vue"
 	import pic from "../../static/image/ad/default.webp"
 	import navBar from "../../components/navBar/navBar.vue" 
-	
+	import {mapState} from 'vuex'
+	import {getData} from '../../utils/localData.js'
 	export default {
 		data() {
 			return {
@@ -624,16 +626,33 @@
 				]
 			}
 		},
+		computed:{
+			...mapState(["localCity"])
+		},
 		components:{
 			listPart,
 			navBar
 		},
 		onLoad() {
+			this.getCityName()
 			this.getInTheaters()
 		},
 		methods: {
+			//先获取经纬度
+			getCityName(){
+				uni.getLocation({
+				    type: 'wgs84',
+				    success:(res)=> {
+						let {latitude,longitude}=res
+						let geohash=`${latitude},${longitude}`
+						this.$store.dispatch('getCityNameByGeohash',{geohash})
+				    }
+				})
+				
+			},
 			//获取正在上映的电影数据
 			getInTheaters(){
+				console.log('city',getData('city'))
 				this.$store.dispatch("getInTheatersData")
 			}
 		}
