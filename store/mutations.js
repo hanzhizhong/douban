@@ -1,10 +1,26 @@
 const {saveData} =require('../utils/localData.js') 
 module.exports={
-	GET_IN_THEATERS_DATA(state,{...data}){
-		console.log('tttt',data)
-	},
+	//城市名
 	GET_CITY_NAME_BY_GEOHASH(state,city){
-		saveData('city')
+		console.log('tttc',city)
+		if(city.includes('市')){
+			city=city.replace(/[市]$/gi,"")
+		}
+		saveData('city',city)
 		state.localCity=city
+	},
+	//正在上映
+	GET_IN_THEATERS_DATA(state,{...data}){
+		state.inTheaters=data
+	},
+	//即将上映
+	GET_COMING_SOON_FILES_DATA(state,{...data}){
+		console.log('soon',data)
+		state.oComingSoon=data
+	},
+	//top250
+	GET_TOP250_FILES_DATA(state,{...data}){
+		console.log('250',data)
+		state.oTop250=data 
 	}
 }

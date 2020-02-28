@@ -6,7 +6,7 @@
 		<view v-if="subjects.length>0" class="part-film">
 			<block v-for="(item,index) in subjects" :key="index">
 				<view class="film">
-					<image :src="item.images.small" mode="widthFix"></image>
+					<image :src="item.images.small" mode="aspectFill"></image>
 					<view class="film-title">{{item.title}}</view>
 					<view class="film-rate">
 						<uni-rate max="5" size="10" :value="item.rating.average"></uni-rate>
@@ -49,13 +49,16 @@
 	}
 	.part-film{
 		display:flex;
-		justify-content:space-between;
+		justify-content:flex-start;
 		flex-wrap:wrap;
 		
 		.film{
-			width:167.5upx;
+			width:25%;
+			padding:10upx;
+			height:240upx;
 			image{
 				width:100%;
+				height:100%;
 				border-radius:8upx;
 			}
 		}

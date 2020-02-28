@@ -8,9 +8,8 @@
 				</text>{{searchName}}
 			</view>
 		</view>
-		<view class="home-content">
-			{{localCity}}
-			<block v-for="(item,index) in filmsList" :key="index">
+		<view class="home-content" >
+			<block v-if="filesList.length>0" v-for="(item,index) in filesList" :key="index">
 				<list-part :title="item.title" :subjects="item.subjects"></list-part>
 			</block>  
 		</view>
@@ -22,612 +21,35 @@
 	import pic from "../../static/image/ad/default.webp"
 	import navBar from "../../components/navBar/navBar.vue" 
 	import {mapState} from 'vuex'
-	import {getData} from '../../utils/localData.js'
 	export default {
 		data() {
 			return {
 				searchName: '搜索',
 				title:"首页",
 				color:"#fff",
-				backgroundColor:"#41B955",
-				filmsList:[
-					{
-						title:"正在热映",
-						subjects:[
-							{
-								rating:{
-									average:7.7
-								},
-								genres:["剧情","犯罪","悬疑"],
-								title:"大赢家",
-								casts:[
-									{
-										avatars:{
-											small:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											large:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											medium:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp"
-										},
-										name_en:"Yang Xiao",
-										name:"肖央",
-										alt:"https://movie.douban.com/celebrity/1274979/",
-										id:"1274979"
-									}
-								],
-								durations:["112分钟"],
-								collect_count:23,
-								mainland_pubdate:"2020-02-21",
-								has_video:false,
-								original_title:"大赢家",
-								subtype:"movie",
-								directors:[
-									{
-										avatars:{
-											small:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											large:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											medium:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp"
-										},
-										name_en:"Boon-lip Quah",
-										name:"柯汶利",
-										alt:"https://movie.douban.com/celebrity/1417306/",
-										id:"1417306"
-									}
-								],
-								pubdates:["201912-07(大规模点映)","2019-12-13(中国大陆)"],
-								year:2020,
-								images:{
-									small:pic,
-									large:pic,
-									medium:pic,
-								},
-								id:"23"
-								
-							},
-							{
-								rating:{
-									average:7.7
-								},
-								genres:["剧情","犯罪","悬疑"],
-								title:"大赢家",
-								casts:[
-									{
-										avatars:{
-											small:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											large:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											medium:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp"
-										},
-										name_en:"Yang Xiao",
-										name:"肖央",
-										alt:"https://movie.douban.com/celebrity/1274979/",
-										id:"1274979"
-									}
-								],
-								durations:["112分钟"],
-								collect_count:23,
-								mainland_pubdate:"2020-02-21",
-								has_video:false,
-								original_title:"大赢家",
-								subtype:"movie",
-								directors:[
-									{
-										avatars:{
-											small:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											large:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											medium:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp"
-										},
-										name_en:"Boon-lip Quah",
-										name:"柯汶利",
-										alt:"https://movie.douban.com/celebrity/1417306/",
-										id:"1417306"
-									}
-								],
-								pubdates:["201912-07(大规模点映)","2019-12-13(中国大陆)"],
-								year:2020,
-								images:{
-									small:pic,
-									large:pic,
-									medium:pic,
-								},
-								id:"23"
-								
-							},
-							{
-								rating:{
-									average:7.7
-								},
-								genres:["剧情","犯罪","悬疑"],
-								title:"大赢家",
-								casts:[
-									{
-										avatars:{
-											small:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											large:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											medium:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp"
-										},
-										name_en:"Yang Xiao",
-										name:"肖央",
-										alt:"https://movie.douban.com/celebrity/1274979/",
-										id:"1274979"
-									}
-								],
-								durations:["112分钟"],
-								collect_count:23,
-								mainland_pubdate:"2020-02-21",
-								has_video:false,
-								original_title:"大赢家",
-								subtype:"movie",
-								directors:[
-									{
-										avatars:{
-											small:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											large:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											medium:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp"
-										},
-										name_en:"Boon-lip Quah",
-										name:"柯汶利",
-										alt:"https://movie.douban.com/celebrity/1417306/",
-										id:"1417306"
-									}
-								],
-								pubdates:["201912-07(大规模点映)","2019-12-13(中国大陆)"],
-								year:2020,
-								images:{
-									small:pic,
-									large:pic,
-									medium:pic,
-								},
-								id:"23"
-								
-							},
-							{
-								rating:{
-									average:7.7
-								},
-								genres:["剧情","犯罪","悬疑"],
-								title:"大赢家",
-								casts:[
-									{
-										avatars:{
-											small:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											large:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											medium:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp"
-										},
-										name_en:"Yang Xiao",
-										name:"肖央",
-										alt:"https://movie.douban.com/celebrity/1274979/",
-										id:"1274979"
-									}
-								],
-								durations:["112分钟"],
-								collect_count:23,
-								mainland_pubdate:"2020-02-21",
-								has_video:false,
-								original_title:"大赢家",
-								subtype:"movie",
-								directors:[
-									{
-										avatars:{
-											small:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											large:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											medium:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp"
-										},
-										name_en:"Boon-lip Quah",
-										name:"柯汶利",
-										alt:"https://movie.douban.com/celebrity/1417306/",
-										id:"1417306"
-									}
-								],
-								pubdates:["201912-07(大规模点映)","2019-12-13(中国大陆)"],
-								year:2020,
-								images:{
-									small:pic,
-									large:pic,
-									medium:pic,
-								},
-								id:"23"
-								
-							}
-						]
-					}
-				,
-				{
-						title:"即将上映",
-						subjects:[
-							{
-								rating:{
-									average:7.7
-								},
-								genres:["剧情","犯罪","悬疑"],
-								title:"大赢家",
-								casts:[
-									{
-										avatars:{
-											small:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											large:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											medium:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp"
-										},
-										name_en:"Yang Xiao",
-										name:"肖央",
-										alt:"https://movie.douban.com/celebrity/1274979/",
-										id:"1274979"
-									}
-								],
-								durations:["112分钟"],
-								collect_count:23,
-								mainland_pubdate:"2020-02-21",
-								has_video:false,
-								original_title:"大赢家",
-								subtype:"movie",
-								directors:[
-									{
-										avatars:{
-											small:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											large:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											medium:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp"
-										},
-										name_en:"Boon-lip Quah",
-										name:"柯汶利",
-										alt:"https://movie.douban.com/celebrity/1417306/",
-										id:"1417306"
-									}
-								],
-								pubdates:["201912-07(大规模点映)","2019-12-13(中国大陆)"],
-								year:2020,
-								images:{
-									small:pic,
-									large:pic,
-									medium:pic,
-								},
-								id:"23"
-								
-							},
-							{
-								rating:{
-									average:7.7
-								},
-								genres:["剧情","犯罪","悬疑"],
-								title:"大赢家",
-								casts:[
-									{
-										avatars:{
-											small:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											large:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											medium:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp"
-										},
-										name_en:"Yang Xiao",
-										name:"肖央",
-										alt:"https://movie.douban.com/celebrity/1274979/",
-										id:"1274979"
-									}
-								],
-								durations:["112分钟"],
-								collect_count:23,
-								mainland_pubdate:"2020-02-21",
-								has_video:false,
-								original_title:"大赢家",
-								subtype:"movie",
-								directors:[
-									{
-										avatars:{
-											small:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											large:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											medium:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp"
-										},
-										name_en:"Boon-lip Quah",
-										name:"柯汶利",
-										alt:"https://movie.douban.com/celebrity/1417306/",
-										id:"1417306"
-									}
-								],
-								pubdates:["201912-07(大规模点映)","2019-12-13(中国大陆)"],
-								year:2020,
-								images:{
-									small:pic,
-									large:pic,
-									medium:pic,
-								},
-								id:"23"
-								
-							},
-							{
-								rating:{
-									average:7.7
-								},
-								genres:["剧情","犯罪","悬疑"],
-								title:"大赢家",
-								casts:[
-									{
-										avatars:{
-											small:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											large:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											medium:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp"
-										},
-										name_en:"Yang Xiao",
-										name:"肖央",
-										alt:"https://movie.douban.com/celebrity/1274979/",
-										id:"1274979"
-									}
-								],
-								durations:["112分钟"],
-								collect_count:23,
-								mainland_pubdate:"2020-02-21",
-								has_video:false,
-								original_title:"大赢家",
-								subtype:"movie",
-								directors:[
-									{
-										avatars:{
-											small:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											large:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											medium:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp"
-										},
-										name_en:"Boon-lip Quah",
-										name:"柯汶利",
-										alt:"https://movie.douban.com/celebrity/1417306/",
-										id:"1417306"
-									}
-								],
-								pubdates:["201912-07(大规模点映)","2019-12-13(中国大陆)"],
-								year:2020,
-								images:{
-									small:pic,
-									large:pic,
-									medium:pic,
-								},
-								id:"23"
-								
-							},
-							{
-								rating:{
-									average:7.7
-								},
-								genres:["剧情","犯罪","悬疑"],
-								title:"大赢家",
-								casts:[
-									{
-										avatars:{
-											small:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											large:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-											medium:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp"
-										},
-										name_en:"Yang Xiao",
-										name:"肖央",
-										alt:"https://movie.douban.com/celebrity/1274979/",
-										id:"1274979"
-									}
-								],
-								durations:["112分钟"],
-								collect_count:23,
-								mainland_pubdate:"2020-02-21",
-								has_video:false,
-								original_title:"大赢家",
-								subtype:"movie",
-								directors:[
-									{
-										avatars:{
-											small:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											large:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-											medium:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp"
-										},
-										name_en:"Boon-lip Quah",
-										name:"柯汶利",
-										alt:"https://movie.douban.com/celebrity/1417306/",
-										id:"1417306"
-									}
-								],
-								pubdates:["201912-07(大规模点映)","2019-12-13(中国大陆)"],
-								year:2020,
-								images:{
-									small:pic,
-									large:pic,
-									medium:pic,
-								},
-								id:"23"
-								
-							}
-						]
-					},
-					{
-							title:"top250",
-							subjects:[
-								{
-									rating:{
-										average:7.7
-									},
-									genres:["剧情","犯罪","悬疑"],
-									title:"大赢家",
-									casts:[
-										{
-											avatars:{
-												small:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-												large:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-												medium:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp"
-											},
-											name_en:"Yang Xiao",
-											name:"肖央",
-											alt:"https://movie.douban.com/celebrity/1274979/",
-											id:"1274979"
-										}
-									],
-									durations:["112分钟"],
-									collect_count:23,
-									mainland_pubdate:"2020-02-21",
-									has_video:false,
-									original_title:"大赢家",
-									subtype:"movie",
-									directors:[
-										{
-											avatars:{
-												small:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-												large:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-												medium:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp"
-											},
-											name_en:"Boon-lip Quah",
-											name:"柯汶利",
-											alt:"https://movie.douban.com/celebrity/1417306/",
-											id:"1417306"
-										}
-									],
-									pubdates:["201912-07(大规模点映)","2019-12-13(中国大陆)"],
-									year:2020,
-									images:{
-										small:pic,
-										large:pic,
-										medium:pic,
-									},
-									id:"23"
-									
-								},
-								{
-									rating:{
-										average:7.7
-									},
-									genres:["剧情","犯罪","悬疑"],
-									title:"大赢家",
-									casts:[
-										{
-											avatars:{
-												small:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-												large:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-												medium:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp"
-											},
-											name_en:"Yang Xiao",
-											name:"肖央",
-											alt:"https://movie.douban.com/celebrity/1274979/",
-											id:"1274979"
-										}
-									],
-									durations:["112分钟"],
-									collect_count:23,
-									mainland_pubdate:"2020-02-21",
-									has_video:false,
-									original_title:"大赢家",
-									subtype:"movie",
-									directors:[
-										{
-											avatars:{
-												small:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-												large:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-												medium:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp"
-											},
-											name_en:"Boon-lip Quah",
-											name:"柯汶利",
-											alt:"https://movie.douban.com/celebrity/1417306/",
-											id:"1417306"
-										}
-									],
-									pubdates:["201912-07(大规模点映)","2019-12-13(中国大陆)"],
-									year:2020,
-									images:{
-										small:pic,
-										large:pic,
-										medium:pic,
-									},
-									id:"23"
-									
-								},
-								{
-									rating:{
-										average:7.7
-									},
-									genres:["剧情","犯罪","悬疑"],
-									title:"大赢家",
-									casts:[
-										{
-											avatars:{
-												small:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-												large:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-												medium:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp"
-											},
-											name_en:"Yang Xiao",
-											name:"肖央",
-											alt:"https://movie.douban.com/celebrity/1274979/",
-											id:"1274979"
-										}
-									],
-									durations:["112分钟"],
-									collect_count:23,
-									mainland_pubdate:"2020-02-21",
-									has_video:false,
-									original_title:"大赢家",
-									subtype:"movie",
-									directors:[
-										{
-											avatars:{
-												small:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-												large:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-												medium:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp"
-											},
-											name_en:"Boon-lip Quah",
-											name:"柯汶利",
-											alt:"https://movie.douban.com/celebrity/1417306/",
-											id:"1417306"
-										}
-									],
-									pubdates:["201912-07(大规模点映)","2019-12-13(中国大陆)"],
-									year:2020,
-									images:{
-										small:pic,
-										large:pic,
-										medium:pic,
-									},
-									id:"23"
-									
-								},
-								{
-									rating:{
-										average:7.7
-									},
-									genres:["剧情","犯罪","悬疑"],
-									title:"大赢家",
-									casts:[
-										{
-											avatars:{
-												small:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-												large:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp",
-												medium:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1518431956.11.webp"
-											},
-											name_en:"Yang Xiao",
-											name:"肖央",
-											alt:"https://movie.douban.com/celebrity/1274979/",
-											id:"1274979"
-										}
-									],
-									durations:["112分钟"],
-									collect_count:23,
-									mainland_pubdate:"2020-02-21",
-									has_video:false,
-									original_title:"大赢家",
-									subtype:"movie",
-									directors:[
-										{
-											avatars:{
-												small:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-												large:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp",
-												medium:"https://img9.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1559275231.36.webp"
-											},
-											name_en:"Boon-lip Quah",
-											name:"柯汶利",
-											alt:"https://movie.douban.com/celebrity/1417306/",
-											id:"1417306"
-										}
-									],
-									pubdates:["201912-07(大规模点映)","2019-12-13(中国大陆)"],
-									year:2020,
-									images:{
-										small:pic,
-										large:pic,
-										medium:pic,
-									},
-									id:"23"
-									
-								}
-							]
-						}
-				]
+				backgroundColor:"#41B955"
 			}
 		},
 		computed:{
-			...mapState(["localCity"])
+			...mapState(["localCity","inTheaters","oComingSoon","oTop250"]),
+			getNameByCity(){
+				if(this.localCity){
+					this.getInTheaters(this.localCity)
+					this.getComingSoon()
+					this.getTop250()
+				}
+				return ''
+			},
+			filesList(){
+				let arr=[]
+				if(Object.keys(this.inTheaters).length>0&&Object.keys(this.oComingSoon).length>0&&Object.keys(this.oTop250).length>0){
+					arr.push({title:this.inTheaters.title,subjects:this.inTheaters.subjects})
+					arr.push({title:this.oComingSoon.title,subjects:this.oComingSoon.subjects})
+					arr.push({title:this.oTop250.title,subjects:this.oTop250.subjects})
+				}
+				console.log('bbb',arr)
+				return arr;
+			}
 		},
 		components:{
 			listPart,
@@ -635,7 +57,6 @@
 		},
 		onLoad() {
 			this.getCityName()
-			this.getInTheaters()
 		},
 		methods: {
 			//先获取经纬度
@@ -651,9 +72,16 @@
 				
 			},
 			//获取正在上映的电影数据
-			getInTheaters(){
-				console.log('city',getData('city'))
-				this.$store.dispatch("getInTheatersData")
+			getInTheaters(city){
+				this.$store.dispatch("getInTheatersData",{city})
+			},
+			//获取即将上映的电影
+			getComingSoon(){
+				this.$store.dispatch("getComingSoonFilesData")
+			},
+			//获取top250
+			getTop250(){
+				this.$store.dispatch("getTop250FilesData")
 			}
 		}
 	}
