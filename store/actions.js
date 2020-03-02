@@ -1,4 +1,4 @@
-import {getInTheaters,getGeohash,getComingSoon,getTop250} from "../api/api.js"
+import {getInTheaters,getGeohash,getComingSoon,getTop250,getNewMovies,getWeekly,getUsBox} from "../api/api.js"
 
 export default{
 	//获取城市名
@@ -38,6 +38,36 @@ export default{
 			commit('GET_TOP250_FILES_DATA',{...ret})
 		}catch(err){
 			console.error(`获取top250的电影数据失败了${err}`)
+		}
+	},
+	//新片
+	async getNewMoviesData({commit}){
+		try{
+			let [err,data]=await getNewMovies()
+			let ret=data.data 
+			commit("GET_NEW_MOVIES_DATA",{...ret})
+		}catch(err){
+			console.error(`获取新片榜数据失败了${err}`)
+		}
+	},
+	//口碑
+	async getWeeklyData({commit}){
+		try{
+			let [err,data]=await getWeekly()
+			let ret=data.data 
+			commit("GET_WEEKLY_DATA",{...ret})
+		}catch(err){
+			console.error(`获取口碑榜数据失败了${err}`)
+		}
+	},
+	//北美票房
+	async getUsBoxMoviesData({commit}){
+		try{
+			let [err,data]=await getUsBox()
+			let ret=data.data 
+			commit('GET_US_BOX_MOVIES_DATA',{...ret})
+		}catch(err){
+			console.error(`获取北美票房榜数据失败了${err}`)
 		}
 	}
 }

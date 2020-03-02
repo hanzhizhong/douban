@@ -2,7 +2,6 @@ const {saveData} =require('../utils/localData.js')
 module.exports={
 	//城市名
 	GET_CITY_NAME_BY_GEOHASH(state,city){
-		console.log('tttc',city)
 		if(city.includes('市')){
 			city=city.replace(/[市]$/gi,"")
 		}
@@ -15,12 +14,23 @@ module.exports={
 	},
 	//即将上映
 	GET_COMING_SOON_FILES_DATA(state,{...data}){
-		console.log('soon',data)
 		state.oComingSoon=data
 	},
 	//top250
 	GET_TOP250_FILES_DATA(state,{...data}){
-		console.log('250',data)
 		state.oTop250=data 
+	},
+	//新片榜
+	GET_NEW_MOVIES_DATA(state,{...data}){
+		state.oNewMovies=data 
+	},
+	//口碑榜
+	GET_WEEKLY_DATA(state,{...data}){
+		state.oWeekly=data
+	},
+	//北美票房榜
+	GET_US_BOX_MOVIES_DATA(state,{...data}){
+		state.oUsBox=data
 	}
+	
 }

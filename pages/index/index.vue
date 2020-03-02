@@ -47,7 +47,6 @@
 					arr.push({title:this.oComingSoon.title,subjects:this.oComingSoon.subjects})
 					arr.push({title:this.oTop250.title,subjects:this.oTop250.subjects})
 				}
-				console.log('bbb',arr)
 				return arr;
 			}
 		},

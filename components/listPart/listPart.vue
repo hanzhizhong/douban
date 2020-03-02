@@ -9,7 +9,7 @@
 					<image :src="item.images.small" mode="aspectFill"></image>
 					<view class="film-title">{{item.title}}</view>
 					<view class="film-rate">
-						<uni-rate max="5" size="10" :value="item.rating.average"></uni-rate>
+						<uni-rate class="film-star" max="5" size="10" :value="item.rating.average" disabled="true"></uni-rate>
 						<text>{{item.rating.average}}</text>
 					</view>
 				</view>
@@ -53,13 +53,14 @@
 		flex-wrap:wrap;
 		
 		.film{
-			width:25%;
-			padding:10upx;
-			height:240upx;
+			width:160upx;
+			margin:10upx;
+			display:flex;
+			flex-direction: column;
 			image{
 				width:100%;
-				height:100%;
-				border-radius:8upx;
+				height:220upx;
+				border-radius:5upx;
 			}
 		}
 	}
@@ -81,5 +82,9 @@
 			margin-left:20upx;
 			padding-bottom:8upx;
 		}
+	}
+	.film-star{
+		position:relative !important;
+		z-index:0!important;
 	}
 </style>
