@@ -8,8 +8,8 @@
 </template>
 
 <script>
-	import rankAd from "../../components/rankAd/rankAd.vue"
-	import recommendList from "../../components/recommendList/recommendList.vue"
+	import rankAd from "../../components/rankAd.vue"
+	import recommendList from "../../components/recommendList.vue"
 	import {mapState} from "vuex"
 	export default {
 		data() {

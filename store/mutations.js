@@ -31,6 +31,22 @@ module.exports={
 	//北美票房榜
 	GET_US_BOX_MOVIES_DATA(state,{...data}){
 		state.oUsBox=data
+	},
+	//影目信息
+	GET_SUBJECT_MOVIES_BY_ID(state,data){
+		state.oSubject=data;
+	},
+	//影人信息
+	GET_ACTORS_BY_ID(state,data){
+		state.oActors=data
+	},
+	//短评
+	GET_SHORT_REVIEWS_BY_ID(state,data){
+		state.oShortReview=data
+	},
+	//影评
+	GET_COMMENTS_BY_ID(state,data){
+		state.oComments=data;
 	}
 	
 }

@@ -1,4 +1,4 @@
-import {getInTheaters,getGeohash,getComingSoon,getTop250,getNewMovies,getWeekly,getUsBox} from "../api/api.js"
+import {getInTheaters,getGeohash,getComingSoon,getTop250,getNewMovies,getWeekly,getUsBox,getSearchMovies,getSubjectData,getActors,getShortReviews,getComments} from "../api/api.js"
 
 export default{
 	//获取城市名
@@ -69,5 +69,53 @@ export default{
 		}catch(err){
 			console.error(`获取北美票房榜数据失败了${err}`)
 		}
-	}
+	},
+	//搜索
+	async getSearchMoviesData({commit},args){
+		try{
+			let ret=await getSearchMovies(args)
+		}catch(err){
+			console.error(`获取搜索信息失败,${err}`)
+		}
+	},
+	//电影条目
+	async getSubjectMoviesById({commit},args){
+		try{
+			let ret=await getSubjectData(args)
+			console.log('ret',ret[1].data)
+			commit("GET_SUBJECT_MOVIES_BY_ID",ret[1].data)
+		}catch(err){
+			console.error(`获取电影条目信息错误${err}`)
+		}
+	},
+	//影人的信息
+	async getActorsById({commit},args){
+		try{
+			let ret=await getActors(args)
+			commit("GET_ACTORS_BY_ID",ret[1].data)
+		}catch(err){
+			console.error(`获取影人信息错误${err}`)
+		}
+	},
+	//获取短评信息
+	async getShortReviewsById({commit},args){
+		try{
+			let ret=await getShortReviews(args)
+			console.log('review',ret[1].data)
+			commit("GET_SHORT_REVIEWS_BY_ID",ret[1].data)
+		}catch(err){
+			console.error(`获取影片短评信息错误,${err}`)
+		}
+		
+	},
+	//获取影评
+	async getCommentsById({commit},args){
+		try{
+			let ret=await getComments(args)
+			console.log('comment',ret[1].data)
+			commit("GET_COMMENTS_BY_ID",ret[1].data)
+		}catch(err){
+			console.error(`获取影评信息错误,${err}`)
+		} 
+	} 
 }

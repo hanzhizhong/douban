@@ -5,7 +5,7 @@
 		</view>
 		<view v-if="subjects.length>0" class="part-film">
 			<block v-for="(item,index) in subjects" :key="index">
-				<view class="film">
+				<view class="film" @tap="getMovieIntroduce(item)">
 					<image :src="item.images.small" mode="aspectFill"></image>
 					<view class="film-title">{{item.title}}</view>
 					<view class="film-rate">
@@ -32,7 +32,12 @@
 			uniRate
 		},
 		methods: {
-			
+			getMovieIntroduce(item){
+				let [id,title]=[item.id,item.title]
+				uni.navigateTo({
+					url:`/pages/detail/detail?id=${id}&title=${title}`
+				})
+			}
 		}
 	}
 </script>
@@ -49,16 +54,15 @@
 	}
 	.part-film{
 		display:flex;
-		justify-content:flex-start;
 		flex-wrap:wrap;
-		
 		.film{
-			width:160upx;
-			margin:10upx;
+			width:25%;
+			margin:10upx 0;
 			display:flex;
 			flex-direction: column;
+			align-items: center;
 			image{
-				width:100%;
+				width:160upx;
 				height:220upx;
 				border-radius:5upx;
 			}
@@ -66,8 +70,8 @@
 	}
 	.film-title{
 		font-weight:bold;
-		line-height:32upx;
-		width:100%;
+		line-height:44upx;
+		width:160upx;
 		text-overflow:ellipsis;
 		overflow:hidden;
 		white-space: nowrap;
@@ -76,15 +80,12 @@
 		display:flex;
 		justify-content: flex-start;
 		align-items:center;
+		width:160upx;
 		height:30upx;
 		font-size:20upx;
 		text{
 			margin-left:20upx;
 			padding-bottom:8upx;
 		}
-	}
-	.film-star{
-		position:relative !important;
-		z-index:0!important;
 	}
 </style>

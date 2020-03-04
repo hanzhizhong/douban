@@ -62,3 +62,56 @@ export const getUsBox=()=>{
 	})
 }
 
+export const getSearchMovies=(data)=>{
+	/* console.log('data',data)
+	let [q='',tag='',start=0,count=20]=[data]
+	console.log('ttt',q,tag,start,count) */
+	
+	return uni.request({
+		url:`${baseUrl}/v2/movie/search`,
+		data:{
+			q:data,
+			tag:'',
+			start:0,
+			count:20
+		},
+		header: {
+		    'Content-type': 'application/x-www-form-urlencoded' //自定义请求头信息
+		}
+	})
+}
+export const getSubjectData=(args)=>{
+	console.log('ttt',args)
+	return uni.request({
+		url:`${baseUrl}/v2/movie/subject/${args.id}`,
+		header:{
+			"Content-type":"application/x-www-form-urlencoded"
+		}
+	})
+}
+export const getActors=(args)=>{
+	return uni.request({
+		url:`${baseUrl}/v2/movie/celebrity/${args.id}`,
+		header:{
+			"Content-type":"application/x-www-form-urlencoded"
+		}
+	})
+}
+//短评
+export const getShortReviews=(args)=>{
+	return uni.request({
+		url:`${baseUrl}/v2/movie/subject/${args.id}/comments`,
+		header:{
+			"Content-type":"application/x-www-form-urlencoded"
+		}
+	}) 
+}
+//影评
+export const getComments=(args)=>{
+	return uni.request({ 
+		url:`${baseUrl}/v2/movie/subject/${args.id}/reviews`,
+		header:{
+			"Content-type":"application/x-www-form-urlencoded"
+		}
+	})  
+}

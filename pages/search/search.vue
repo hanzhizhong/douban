@@ -8,13 +8,13 @@
 		</nav-bar>
 		<view class="search-input">
 			<text class="iconfont iconsearch"></text>
-			<input class="uni-input" confirm-type="search" placeholder="搜索" />
+			<input class="uni-input" confirm-type="search" placeholder="搜索" v-model.trim="getSearchValue"/>
 		</view>
 	</view>
 </template>
 
 <script>
-	import navBar from "../../components/navBar/navBar.vue"
+	import navBar from "../../components/navBar.vue"
 	export default {
 		data() {
 			return {
@@ -26,12 +26,25 @@
 		components:{
 			navBar
 		},
+		computed:{
+			getSearchValue:{
+				get(){
+					return ''
+				},
+				set(val){
+					let q=val
+					this.$store.dispatch('getSearchMoviesData',q)
+				}
+			}
+		},
 		methods: {
 			goback(){
-				console.log("back")
+				uni.navigateBack()
 			},
 			goHome(){
-				console.log("home")
+				uni.switchTab({
+					url:"/pages/index/index"
+				})
 			}
 			
 		}
@@ -63,6 +76,7 @@
 		padding-left:40upx;
 		background-color:#fff;
 		border-radius:8upx;
+		height:68upx;
 	}
 }
 </style>

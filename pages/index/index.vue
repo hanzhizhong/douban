@@ -3,7 +3,7 @@
 		<nav-bar :title="title" :color="color" :backgroundColor="backgroundColor">
 		</nav-bar>
 		<view class="home-search">
-			<view class="search">
+			<view class="search" @tap="pages2Search">
 				<text class="iconfont iconsearch">	
 				</text>{{searchName}}
 			</view>
@@ -17,9 +17,9 @@
 </template>
 
 <script>
-	import listPart from "../../components/listPart/listPart.vue"
+	import listPart from "../../components/listPart.vue"
 	import pic from "../../static/image/ad/default.webp"
-	import navBar from "../../components/navBar/navBar.vue" 
+	import navBar from "../../components/navBar.vue" 
 	import {mapState} from 'vuex'
 	export default {
 		data() {
@@ -81,6 +81,12 @@
 			//获取top250
 			getTop250(){
 				this.$store.dispatch("getTop250FilesData")
+			},
+			//页面跳转到search
+			pages2Search(){
+				uni.navigateTo({
+					url:"../search/search"
+				})
 			}
 		}
 	}
