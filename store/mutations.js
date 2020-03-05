@@ -42,7 +42,7 @@ module.exports={
 	},
 	//短评
 	GET_SHORT_REVIEWS_BY_ID(state,data){
-		state.oShortReview=data
+		state.oShortReviews=data
 	},
 	//影评
 	GET_COMMENTS_BY_ID(state,data){

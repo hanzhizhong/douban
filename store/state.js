@@ -9,6 +9,6 @@ export default{
 	oUsBox:{},//北美票房榜
 	oSubject:{},//电影条目信息
 	oActors:{},//影人信息
-	oShortReview:{},//短评
+	oShortReviews:{},//短评
 	oComments:{},//影评
 }

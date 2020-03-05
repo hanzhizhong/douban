@@ -53,62 +53,81 @@
 			</view>
 			<view class="avatars">
 				<!-- 影人信息 -->
-				<view>影人</view>
-				<scroll-view scroll-x="true" >
-					<view>
-						<image></image>
-						<text></text>
-						<text></text>
-					</view>
+				<view class="avatars-title">影人</view>
+				<scroll-view scroll-x="true" show-scrollbar="true" class="avatars-scroll">
+					<block v-for="(item,index) in oSubject.casts" :key="index">
+						<view class="avatars-album">
+							<image :src="item.avatars.small" mode="aspectFill"></image>
+							<view class="avatars-name">{{item.name}}</view>
+							<view class="avatars-name">{{item.name_en}}</view>
+						</view>
+					</block>
 				</scroll-view>
 			</view>
-			<view class="trailer"></view>
 			<!-- 短评 -->
 			<view class="reviews">
 				<view class="reviews-title">短评</view>
-				<view>
-					<view>
-						<image></image>
-						<view>
-							<view>石之海</view>
-							<view>
-								<view>
-									<uni-rate size="10" max="5" value="3"></uni-rate>
+				<block v-for="(item,index) in oShortReviews.comments" :key="index" v-if="index<4">
+					<view class="reviews-list">
+						<view class="reviews-author">
+							<image :src="item.author.avatar"></image>
+							<view class="reviews-name-rate">
+								<view class="reviews-name">{{item.author.name}}</view>
+								<view class="reviews-rate">
+									<view>
+										<uni-rate size="10" :max="item.rating.max" :value="item.rating.value"></uni-rate>
+									</view>
+									<text>{{item.created_at}}</text>
 								</view>
-								<text>2019年11月15日</text>
 							</view>
 						</view>
+						<view class="reviews-content">
+							{{item.content}}
+						</view>
+						<view class="reviews-useful">
+							<text class="iconfont icondianzan"></text>{{item.useful_count}}
+						</view>
 					</view>
-					<view>
-						一星给陈文淇 在近两个小时尬到抽搐的剧情里她就是救苦救难的菩萨
-					</view>
-					<view><text class="iconfont icondianzan"></text>1149</view>
-				</view>
+				</block>
+			</view>
+			<!-- 预告片 -->
+			<view class="trailer">
+				<view class="trailer-title">预告片</view>
+				<scroll-view scroll-x="true" class="trailer-scroll">
+					<block v-for="(item,index) in oSubject.trailers" :key="index">
+						<view class="trailer-video">
+							<video :src="item.resource_url" controls :poster="item.small" :title="item.title"></video>
+							<view>{{item.title}}</view>
+						</view>
+					</block>
+				</scroll-view>
 			</view>
 			<view class="comments">
 				<view class="comments-title">
-					影评6843条
+					影评{{oComments.total}}条
 				</view>
-				<view>
-					<view>
-						<image></image>
-						<text>二十二岛主</text>
-						<view>
-							<text>看过</text>
-							<uni-rate size="10" value="2" max="5"></uni-rate>
+				<block v-for="(item,index) in oComments.reviews" :key="index" v-if="index<10">
+					<view class="comments-author">
+						<view class="comments-name">
+							<image :src="item.author.avatar"></image>
+							<text>{{item.author.name}}</text>
+							<view class="comments-rate">
+								<text>看过</text>
+								<uni-rate size="10" :value="item.rating.value" :max="item.rating.max"></uni-rate>
+							</view>
+						</view>
+						<view class="comments-content">
+							<view>{{item.title}}</view>
+							<text>
+								{{item.summary}}
+							</text>
+						</view>
+						<view class="comments-count">
+							<text>{{item.comments_count}}回复.{{item.useful_count}}有用.{{item.useless_count}}转发</text>
 						</view>
 					</view>
-					<view>
-						<view>《大约在冬季》：现在连爱情故事都降级了吗？</view>
-						<text>
-							"本文首发于公众号：电影岛赏（j_movie），欢迎关注。 作者：君宁 听人说过一条烂片定律—— 凡是拿歌名做片名的，十有八九都是烂片。 印象中逃过这条定律的，好像只有《甜蜜蜜》。 我本来是不太信的，直到我去看..."
-						</text>
-					</view>
-					<view>
-						<text>114回复.269有用.38转发</text>
-					</view>
-				</view>
-				
+					
+				</block>
 			</view>
 			
 		</view>
@@ -292,6 +311,125 @@
 			display: -webkit-box;
 			-webkit-box-orient: vertical;
 			-webkit-line-clamp: 3;
+		}
+	}
+	// 影人信息
+	.avatars{
+		.avatars-title{
+			font-size:36upx;
+			font-weight: bold;
+		}
+		.avatars-scroll{
+			white-space: nowrap;
+		}
+		.avatars-album{
+			width:30%;
+			margin:40upx 0;
+			display: inline-block;
+			image{
+				width:200upx;
+				height:280upx;
+				border-radius:8upx;
+			}
+		}
+		.avatars-name{
+			font-size:24upx;
+			font-size:@default;
+			line-height:32upx;
+		}
+		
+	}
+	//短评
+	.reviews{
+		background-color:@bgcolor;
+		border-radius:10upx;
+		padding:20upx;
+		.reviews-title{
+			font-size:36upx;
+			font-weight: bold;
+		}
+		.reviews-list{
+			border-bottom:1px solid #dedede;
+			padding:40upx 0;
+			&:last-of-type{
+				border:none;
+			}
+		}
+		.reviews-author{
+			display:flex;
+			align-items: center;
+			image{
+				width:68upx;
+				height:68upx;
+				border-radius:50%;
+			}
+		}
+		.reviews-name-rate{
+			display:flex;
+			flex-direction: column;
+			justify-content:space-between;
+			margin-left:20upx;
+		}
+		.reviews-name{
+			font-size:30upx;
+			font-weight:bold;
+			height:44upx;
+		}
+		.reviews-rate{
+			display:flex;
+			align-items: center;
+			text{
+				margin-left:20upx;
+				color:#cccccc;
+			}
+		}
+		.reviews-content{
+			font-size:28upx;
+			color:@default;
+			text-align:justify;
+			line-height:36upx;
+			margin:20upx 0;
+		}
+		.reviews-useful{
+			text{
+				color:#cccccc;
+			}
+		}
+	}
+	// 预告片
+	.trailer{
+		margin:40upx 0;
+		.trailer-title{
+			font-size:36upx;
+			font-weight: bold;
+		}
+		.trailer-scroll{
+			white-space: nowrap;
+			margin-top:40upx;
+		}
+		.trailer-video{
+			width:60%;
+			display:inline-block;
+			video{
+				width:410upx;
+				height:250upx;
+			}
+			view{
+				line-height:44upx;
+				color:@default;
+			}
+		}
+		
+	}
+	// 影评
+	.comments{
+		margin:40upx 0;
+		background-color:@bgcolor;
+		padding:20upx;
+		border-radius:10upx;
+		.comments-title{
+			font-size:36upx;
+			font-weight: bold;
 		}
 	}
 </style>
