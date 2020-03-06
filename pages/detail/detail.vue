@@ -1,6 +1,13 @@
 <template>
 	<view class="detail">
-		<nav-bar :title="title" :color="color" :backgroundColor="backgroundColor"></nav-bar>
+		<!-- <nav-bar :title="title" :color="color" :backgroundColor="backgroundColor"></nav-bar> -->
+		<uni-nav-bar fixed status-bar>
+			<view slot="left" class="left-option">
+				<text class="iconfont icontubiao-"></text>
+				<text class="iconfont iconhome"></text>
+			</view>
+			<view class="nav-title">{{title}}</view>
+		</uni-nav-bar>
 		<view class="detail-content">
 			<view class="title">
 				<image :src="oSubject.images.large" mode="aspectFill"></image>
@@ -107,8 +114,8 @@
 					影评{{oComments.total}}条
 				</view>
 				<block v-for="(item,index) in oComments.reviews" :key="index" v-if="index<10">
-					<view class="comments-author">
-						<view class="comments-name">
+					<view class="comments-part">
+						<view class="comments-author">
 							<image :src="item.author.avatar"></image>
 							<text>{{item.author.name}}</text>
 							<view class="comments-rate">
@@ -136,7 +143,7 @@
 
 <script>
 	import navBar from '../../components/navBar.vue'
-	import {uniRate} from "@dcloudio/uni-ui"
+	import {uniRate,uniNavBar} from "@dcloudio/uni-ui"
 	import {mapState} from 'vuex'
 	export default {
 		data() {
@@ -148,7 +155,7 @@
 			}
 		},
 		components:{
-			navBar,
+			uniNavBar,
 			uniRate
 		},
 		computed:{
@@ -197,6 +204,20 @@
 			box-shadow: 0 0 4upx rgba(0,0,0,0.8);
 		}
 		
+	}
+	.nav-title{
+		font-size:36upx;
+		color:@primary;
+		font-weight:bold;
+	}
+	.left-option{
+		display:flex;
+		align-items:center;
+		text{
+			font-size:44upx;
+			color:@primary;
+			margin-right:40upx;
+		}
 	}
 	.title-part{
 		width:68%;
@@ -423,13 +444,51 @@
 	}
 	// 影评
 	.comments{
-		margin:40upx 0;
 		background-color:@bgcolor;
 		padding:20upx;
 		border-radius:10upx;
 		.comments-title{
 			font-size:36upx;
 			font-weight: bold;
+		}
+		.comments-part{
+			margin:40upx 0;
+		}
+		.comments-author{
+			display:flex;
+			align-items:center;
+			image{
+				width:44upx;
+				height:44upx;
+				border-radius:50%;
+				margin-right:10upx;
+			}
+			color:#cccccc;
+		}
+		.comments-rate{
+			display:flex;
+			align-items:center;
+			margin-left:10upx;
+		}
+		.comments-content{
+			display:flex;
+			flex-direction:column;
+			view{
+				font-size:32upx;
+				font-weight:bold;
+				margin:10upx 0;
+				line-height:44upx;
+			}
+			text{
+				text-align:justify;
+				font-size:28upx;
+				line-height:36upx;
+				color:@default;
+				margin:20upx 0;
+			}
+		}
+		.comments-count{
+			color:#cccccc;
 		}
 	}
 </style>

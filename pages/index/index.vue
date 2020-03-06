@@ -1,7 +1,6 @@
 <template>
 	<view class="home">
-		<nav-bar :title="title" :color="color" :backgroundColor="backgroundColor">
-		</nav-bar>
+		<uni-nav-bar title="首页" fixed status-bar color="#ffffff" background-color="#41B955"></uni-nav-bar>
 		<view class="home-search">
 			<view class="search" @tap="pages2Search">
 				<text class="iconfont iconsearch">	
@@ -19,7 +18,8 @@
 <script>
 	import listPart from "../../components/listPart.vue"
 	import pic from "../../static/image/ad/default.webp"
-	import navBar from "../../components/navBar.vue" 
+	//import navBar from "../../components/navBar.vue" 
+	import {uniNavBar} from "@dcloudio/uni-ui"
 	import {mapState} from 'vuex'
 	export default {
 		data() {
@@ -52,7 +52,7 @@
 		},
 		components:{
 			listPart,
-			navBar
+			uniNavBar
 		},
 		onLoad() {
 			this.getCityName()
