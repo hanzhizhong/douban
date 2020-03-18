@@ -9,7 +9,7 @@
 					<image :src="item.images.small" mode="aspectFill"></image>
 					<view class="film-title">{{item.title}}</view>
 					<view class="film-rate">
-						<uni-rate class="film-star" max="5" size="10" :value="item.rating.average" disabled="true"></uni-rate>
+						<uni-rate class="film-star" max="5" size="10" :value="getValue(item)" disabled="true"></uni-rate>
 						<text>{{item.rating.average}}</text>
 					</view>
 				</view>
@@ -37,6 +37,10 @@
 				uni.navigateTo({
 					url:`/pages/detail/detail?id=${id}&title=${title}`
 				})
+			},
+			getValue(item){
+				let ret=(item.rating.average/(item.rating.max/5)).toFixed(1)
+				return ret
 			}
 		}
 	}

@@ -81,7 +81,6 @@ export const getSearchMovies=(data)=>{
 	})
 }
 export const getSubjectData=(args)=>{
-	console.log('ttt',args)
 	return uni.request({
 		url:`${baseUrl}/v2/movie/subject/${args.id}`,
 		header:{

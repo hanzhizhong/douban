@@ -82,7 +82,6 @@ export default{
 	async getSubjectMoviesById({commit},args){
 		try{
 			let ret=await getSubjectData(args)
-			console.log('ret',ret[1].data)
 			commit("GET_SUBJECT_MOVIES_BY_ID",ret[1].data)
 		}catch(err){
 			console.error(`获取电影条目信息错误${err}`)
@@ -101,7 +100,6 @@ export default{
 	async getShortReviewsById({commit},args){
 		try{
 			let ret=await getShortReviews(args)
-			console.log('review',ret[1].data)
 			commit("GET_SHORT_REVIEWS_BY_ID",ret[1].data)
 		}catch(err){
 			console.error(`获取影片短评信息错误,${err}`)
@@ -112,7 +110,6 @@ export default{
 	async getCommentsById({commit},args){
 		try{
 			let ret=await getComments(args)
-			console.log('comment',ret[1].data)
 			commit("GET_COMMENTS_BY_ID",ret[1].data)
 		}catch(err){
 			console.error(`获取影评信息错误,${err}`)

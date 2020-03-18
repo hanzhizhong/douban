@@ -1,5 +1,5 @@
 <template>
-	<view class="home">
+	<view class="home"> 
 		<uni-nav-bar title="首页" fixed status-bar color="#ffffff" background-color="#41B955"></uni-nav-bar>
 		<view class="home-search">
 			<view class="search" @tap="pages2Search">
@@ -17,8 +17,6 @@
 
 <script>
 	import listPart from "../../components/listPart.vue"
-	import pic from "../../static/image/ad/default.webp"
-	//import navBar from "../../components/navBar.vue" 
 	import {uniNavBar} from "@dcloudio/uni-ui"
 	import {mapState} from 'vuex'
 	export default {
