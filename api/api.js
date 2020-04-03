@@ -1,18 +1,18 @@
 import config from "../config/config.js" 
 const baseUrl='https://douban.uieee.com'
 
-export const getGeohash=({...data})=>{
+export const getGeohash=(geohash)=>{
 	return uni.request({
-		url:`https://elm.cangdu.org/v2/pois/${data.geohash}`,
+		url:`https://elm.cangdu.org/v2/pois/${geohash}`,
 		header: {
 		    'Content-type': 'application/x-www-form-urlencoded' //自定义请求头信息
 		}
 	})
 }
 //正在上映
-export const getInTheaters=({...city})=>{
+export const getInTheaters=(city)=>{
 	return uni.request({
-		url:`${baseUrl}/v2/movie/in_theaters?city=${city.city}`,
+		url:`${baseUrl}/v2/movie/in_theaters?city=${city}`,
 		header: {
 		    'Content-type': 'application/x-www-form-urlencoded' //自定义请求头信息
 		}
@@ -80,35 +80,35 @@ export const getSearchMovies=(data)=>{
 		}
 	})
 }
-export const getSubjectData=(args)=>{
+export const getSubjectData=(id)=>{
 	return uni.request({
-		url:`${baseUrl}/v2/movie/subject/${args.id}`,
+		url:`${baseUrl}/v2/movie/subject/${id}`,
 		header:{
 			"Content-type":"application/x-www-form-urlencoded"
 		}
 	})
 }
-export const getActors=(args)=>{
+export const getActors=(id)=>{
 	return uni.request({
-		url:`${baseUrl}/v2/movie/celebrity/${args.id}`,
+		url:`${baseUrl}/v2/movie/celebrity/${id}`,
 		header:{
 			"Content-type":"application/x-www-form-urlencoded"
 		}
 	})
 }
 //短评
-export const getShortReviews=(args)=>{
+export const getShortReviews=(id)=>{
 	return uni.request({
-		url:`${baseUrl}/v2/movie/subject/${args.id}/comments`,
+		url:`${baseUrl}/v2/movie/subject/${id}/comments`,
 		header:{
 			"Content-type":"application/x-www-form-urlencoded"
 		}
 	}) 
 }
 //影评
-export const getComments=(args)=>{
+export const getComments=(id)=>{
 	return uni.request({ 
-		url:`${baseUrl}/v2/movie/subject/${args.id}/reviews`,
+		url:`${baseUrl}/v2/movie/subject/${id}/reviews`,
 		header:{
 			"Content-type":"application/x-www-form-urlencoded"
 		}

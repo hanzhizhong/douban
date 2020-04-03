@@ -6,6 +6,5 @@ module.exports= {
 	getData(name){
 		let ret= uni.getStorageSync(name)
 		return ret!=''?JSON.parse(ret):""
-		
 	}
 }

@@ -1,51 +1,48 @@
 const {saveData} =require('../utils/localData.js') 
 module.exports={
 	//城市名
-	GET_CITY_NAME_BY_GEOHASH(state,city){
-		if(city.includes('市')){
-			city=city.replace(/[市]$/gi,"")
-		}
+	GET_CITY_NAME_BY_GEOHASH(state,{city}){
 		saveData('city',city)
 		state.localCity=city
 	},
 	//正在上映
-	GET_IN_THEATERS_DATA(state,{...data}){
-		state.inTheaters=data
+	GET_IN_THEATERS_DATA(state,{ret}){
+		state.inTheaters=ret
 	},
 	//即将上映
-	GET_COMING_SOON_FILES_DATA(state,{...data}){
-		state.oComingSoon=data
+	GET_COMING_SOON_FILES_DATA(state,{ret}){
+		state.oComingSoon=ret
 	},
 	//top250
-	GET_TOP250_FILES_DATA(state,{...data}){
-		state.oTop250=data 
+	GET_TOP250_FILES_DATA(state,{ret}){
+		state.oTop250=ret 
 	},
 	//新片榜
-	GET_NEW_MOVIES_DATA(state,{...data}){
+	GET_NEW_MOVIES_DATA(state,{data}){
 		state.oNewMovies=data 
 	},
 	//口碑榜
-	GET_WEEKLY_DATA(state,{...data}){
+	GET_WEEKLY_DATA(state,{data}){
 		state.oWeekly=data
 	},
 	//北美票房榜
-	GET_US_BOX_MOVIES_DATA(state,{...data}){
+	GET_US_BOX_MOVIES_DATA(state,{data}){
 		state.oUsBox=data
 	},
 	//影目信息
-	GET_SUBJECT_MOVIES_BY_ID(state,data){
+	GET_SUBJECT_MOVIES_BY_ID(state,{data}){
 		state.oSubject=data;
 	},
 	//影人信息
-	GET_ACTORS_BY_ID(state,data){
+	GET_ACTORS_BY_ID(state,{data}){
 		state.oActors=data
 	},
 	//短评
-	GET_SHORT_REVIEWS_BY_ID(state,data){
+	GET_SHORT_REVIEWS_BY_ID(state,{data}){
 		state.oShortReviews=data
 	},
 	//影评
-	GET_COMMENTS_BY_ID(state,data){
+	GET_COMMENTS_BY_ID(state,{data}){
 		state.oComments=data;
 	}
 	

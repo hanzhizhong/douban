@@ -19,6 +19,7 @@
 	import listPart from "../../components/listPart.vue"
 	import {uniNavBar} from "@dcloudio/uni-ui"
 	import {mapState} from 'vuex'
+	import {getData} from '../../utils/localData.js'
 	export default {
 		data() {
 			return {
@@ -30,14 +31,6 @@
 		},
 		computed:{
 			...mapState(["localCity","inTheaters","oComingSoon","oTop250"]),
-			getNameByCity(){
-				if(this.localCity){
-					this.getInTheaters(this.localCity)
-					this.getComingSoon()
-					this.getTop250()
-				}
-				return ''
-			},
 			filesList(){
 				let arr=[]
 				if(Object.keys(this.inTheaters).length>0&&Object.keys(this.oComingSoon).length>0&&Object.keys(this.oTop250).length>0){
@@ -53,24 +46,15 @@
 			uniNavBar
 		},
 		onLoad() {
-			this.getCityName()
+			this.getInTheaters(),
+			this.getComingSoon(),
+			this.getTop250()
 		},
 		methods: {
-			//先获取经纬度
-			getCityName(){
-				uni.getLocation({
-				    type: 'wgs84',
-				    success:(res)=> {
-						let {latitude,longitude}=res
-						let geohash=`${latitude},${longitude}`
-						this.$store.dispatch('getCityNameByGeohash',{geohash})
-				    }
-				})
-				
-			},
 			//获取正在上映的电影数据
-			getInTheaters(city){
-				this.$store.dispatch("getInTheatersData",{city})
+			getInTheaters(){
+				let city=getData('city')
+				this.$store.dispatch("getInTheatersData",city)
 			},
 			//获取即将上映的电影
 			getComingSoon(){
@@ -91,6 +75,9 @@
 </script>
  
 <style lang="less" scoped>
+	[v-cloak]{
+		display:none;
+	}
 	.home-search{
 		display:flex;
 		justify-content:center;

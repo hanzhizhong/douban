@@ -1,9 +1,11 @@
 <template>
 	<view class="rank">
-		<rank-ad :title="oNewMovies.title" :moviesData="oNewMovies.subjects" :bg="oNewMovies.subjects[3].images.large"></rank-ad>
-		<rank-ad :title="oWeekly.title" :moviesData="oWeekly.subjects" :bg="oWeekly.subjects[3].subject.images.large"></rank-ad>
-		<recommend-list :title="oTop250.title" :moviesData="oTop250.subjects" :bg="oTop250.subjects[0].images.small"></recommend-list>
-		<recommend-list :title="oUsBox.title" :moviesData="oUsBox.subjects" :bg="oUsBox.subjects[0].subject.images.small"></recommend-list>
+		<block v-if="Object.keys(oNewMovies).length&&Object.keys(oWeekly).length&&Object.keys(oTop250).length&&Object.keys(oUsBox).length">
+			<rank-ad :title="oNewMovies.title" :moviesData="oNewMovies.subjects" :bg="oNewMovies.subjects[3].images.large"></rank-ad>
+			<rank-ad :title="oWeekly.title" :moviesData="oWeekly.subjects" :bg="oWeekly.subjects[3].subject.images.large"></rank-ad>
+			<recommend-list :title="oTop250.title" :moviesData="oTop250.subjects" :bg="oTop250.subjects[0].images.small"></recommend-list>
+			<recommend-list :title="oUsBox.title" :moviesData="oUsBox.subjects" :bg="oUsBox.subjects[0].subject.images.small"></recommend-list>
+		</block>
 	</view>
 </template>
 

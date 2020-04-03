@@ -8,7 +8,7 @@
 			</view>
 			<view class="nav-title">{{title}}</view>
 		</uni-nav-bar>
-		<view class="detail-content">
+		<view class="detail-content" v-if="Object.keys(oSubject).length &&oSubject.title===title">
 			<view class="title">
 				<image :src="oSubject.images.large" mode="aspectFill"></image>
 				<view class="title-part">
@@ -85,7 +85,6 @@
 				backgroundColor:'#ffffff',
 				color:'#323232',
 				id:'',
-				paramOption:{}
 			}
 		},
 		components:{
@@ -101,18 +100,19 @@
 			...mapState(['oSubject','oShortReviews','oComments']),
 			starValue(){
 				if(Object.keys(this.oSubject).length>0){
-					console.log()
 					return (this.oSubject.rating.average/(this.oSubject.rating.max/5)).toFixed(1)
 				}
 			}
 		},
 		onLoad(option){
-			
-			this.paramOption=option
-			
+			this.id=option.id;
+			this.title=option.title;
+			this.getSubject()
+			this.getComments()
+			this.getShortReviews()
 		},
 		watch:{
-			paramOption(val){
+			/* paramOption(val){
 				if(Object.keys(val).length>0){
 					this.id=val.id;
 					this.title=val.title;
@@ -120,20 +120,20 @@
 					this.getComments()
 					this.getShortReviews()
 				}
-			}
+			} */
 		},
 		methods: {
 			//获取电影条目信息
 			getSubject(){
-				this.$store.dispatch("getSubjectMoviesById",{id:this.id})
+				this.$store.dispatch("getSubjectMoviesById",this.id)
 			},
 			//短评
 			getShortReviews(){
-				this.$store.dispatch("getShortReviewsById",{id:this.id})
+				this.$store.dispatch("getShortReviewsById",this.id)
 			},
 			//影评
 			getComments(){
-				this.$store.dispatch("getCommentsById",{id:this.id})
+				this.$store.dispatch("getCommentsById",this.id)
 			},
 			//返回上一级
 			goback(){
