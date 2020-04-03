@@ -3,6 +3,7 @@ unpackage
 
 .DS_Store
 /node_modules/
+@dcloudio
 dist
 
 # local env files
